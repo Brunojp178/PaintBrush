@@ -5,6 +5,8 @@
  */
 package com.mycompany.paintbrush;
 
+import java.awt.Color;
+import javax.swing.JColorChooser;
 import javax.swing.UIManager;
 
 /**
@@ -13,8 +15,9 @@ import javax.swing.UIManager;
  */
 public class MainPainel extends javax.swing.JFrame {
     
+    // Instancia de pincel.
     Pincel p = new Pincel();
-    int xi, yi, x, y;
+    JColorChooser paleta;
     
     /**
      * Creates new form MainPainel
@@ -22,6 +25,9 @@ public class MainPainel extends javax.swing.JFrame {
     public MainPainel() {
         initComponents();
         p.canvas = Canvas.getGraphics();
+        paleta = jColorChooser1;
+        paleta.setColor(Color.black);
+        Brush1.setSelected(true);
     }
 
     /**
@@ -44,6 +50,7 @@ public class MainPainel extends javax.swing.JFrame {
         Brush7 = new javax.swing.JRadioButton();
         sizeComboBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
         Canvas = new javax.swing.JPanel();
         jColorChooser1 = new javax.swing.JColorChooser();
 
@@ -52,7 +59,7 @@ public class MainPainel extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         BrushGroup.add(Brush1);
-        Brush1.setText("Pincel");
+        Brush1.setText("Ponto");
         Brush1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Brush1ActionPerformed(evt);
@@ -116,6 +123,13 @@ public class MainPainel extends javax.swing.JFrame {
 
         jLabel1.setText("Tamanho: ");
 
+        jCheckBox1.setText("Exibir info");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -124,23 +138,25 @@ public class MainPainel extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sizeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Brush3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Brush1)
                             .addComponent(Brush2)
-                            .addComponent(Brush3)
                             .addComponent(Brush4)
                             .addComponent(Brush5)
                             .addComponent(Brush6)
                             .addComponent(Brush7)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1)
+                            .addComponent(jCheckBox1))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Brush1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Brush2)
@@ -154,7 +170,9 @@ public class MainPainel extends javax.swing.JFrame {
                 .addComponent(Brush6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Brush7)
-                .addGap(4, 4, 4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -212,7 +230,7 @@ public class MainPainel extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
@@ -220,7 +238,7 @@ public class MainPainel extends javax.swing.JFrame {
 
     private void Brush1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Brush1ActionPerformed
         // Pincel é a mesma coisa que ponto.
-        p.figura = "pincel";
+        p.figura = "ponto";
         System.out.println("Pincel : Ponto");
     }//GEN-LAST:event_Brush1ActionPerformed
 
@@ -258,22 +276,64 @@ public class MainPainel extends javax.swing.JFrame {
     private void CanvasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CanvasMouseClicked
         // Click do mouse
         System.out.println("Mouse : click");
+        String fig = p.figura;
+        switch(fig){
+            case "ponto":
+                p.setInicio(evt.getX(), evt.getY());
+                p.drawPonto(paleta.getColor());
+                break;
+            default:
+                System.out.println("Deu algo errado! :V");
+                break;
+        }
     }//GEN-LAST:event_CanvasMouseClicked
 
     private void CanvasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CanvasMousePressed
         // Prechionar do mouse
         System.out.println("Mouse : segurando");
-        
+        String fig = p.figura;
+        switch(fig){
+            case "ponto":
+                p.setInicio(evt.getX(), evt.getY());
+                p.drawPonto(paleta.getColor());
+                break;
+            case "linha":
+                System.out.println("Pincel : registrando inicio Linha");
+                System.out.println(evt.getX()+ " " +  evt.getY());
+                p.setInicio(evt.getX(), evt.getY());
+                break;
+            default:
+                System.out.println("Deu algo errado! :V");
+                break;
+        }
     }//GEN-LAST:event_CanvasMousePressed
 
     private void CanvasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CanvasMouseReleased
         // Soltar do mouse
         System.out.println("Mouse : solto");
+        //String fig = p.figura;
+        switch(p.figura){
+            case "ponto":
+                break;
+            case "linha":
+                p.setFim(evt.getX(), evt.getY());
+                p.drawLinha(paleta.getColor());
+                break;
+            default:
+                System.out.println("Deu algo errado! :V");
+                break;
+        }
+        
     }//GEN-LAST:event_CanvasMouseReleased
 
     private void CanvasMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CanvasMouseDragged
         // Arrastar do mouse
-        System.out.println("Mouse : arrastando");
+        if(p.figura.equals("ponto")){
+            p.setInicio(evt.getX(), evt.getY());
+            p.info = false;
+            p.drawPonto(paleta.getColor());
+        }
+//        System.out.println("Mouse : arrastando");
     }//GEN-LAST:event_CanvasMouseDragged
 
     private void sizeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sizeComboBoxActionPerformed
@@ -301,6 +361,11 @@ public class MainPainel extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_sizeComboBoxActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        p.info = !p.info;
+        System.out.println("Pincel : informações = " + p.info);
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,6 +413,7 @@ public class MainPainel extends javax.swing.JFrame {
     private javax.swing.JRadioButton Brush7;
     private javax.swing.ButtonGroup BrushGroup;
     private javax.swing.JPanel Canvas;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

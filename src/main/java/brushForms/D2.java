@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package brushForms;
 
-/**
- *
- * @author Bruno
- */
-public class D2 {
+import java.awt.Color;
+
+
+public class D2 extends Formas{
+    public double area;
+    public Color cor;
+    public Color corFundo;
     
+    // Area de um quadrado, usar @Override p/ circulo.
+    public void area(){
+        // Area de um retangulo é base * lado
+        double a = Math.abs(x - xi);
+        a = a * Math.abs(y - yi);
+        area = a;
+    }
 }

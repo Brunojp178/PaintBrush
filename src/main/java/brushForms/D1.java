@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package brushForms;
 
 import java.awt.Color;
 
-/**
- *
- * @author Bruno
- */
+
 public class D1 extends Formas{
     public double comprimento;
     public Color cor;
@@ -21,6 +13,5 @@ public class D1 extends Formas{
         aux += Math.pow((x - xi), 2);
         aux += Math.pow((y - yi), 2);
         comprimento = Math.sqrt(aux);
-        
     }
 }

@@ -3,10 +3,7 @@ package brushForms;
 import java.awt.Color;
 import java.awt.Graphics;
 
-/**
- *
- * @author Bruno
- */
+
 public class Ponto extends D1{
     // Por ser um ponto, tem tamanho 1.
     // 2 construtores, um só define o comprimento e o outro já define as coordenadas e a cor

@@ -41,4 +41,9 @@ public class Pincel {
         Linha l = new Linha(this.xi, this.yi, this.x, this.y, c);
         l.draw(canvas, info);
     }
+    
+    public void drawRetangulo(Color c, Color f){
+        Retangulo r = new Retangulo(this.xi, this.yi, this.x, this.y, c, f);
+        r.draw(canvas, info);
+    }
 }

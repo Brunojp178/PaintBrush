@@ -180,7 +180,7 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="BrushGroup"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="change"/>
+            <Property name="text" type="java.lang.String" value="Spray"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Brush6ActionPerformed"/>

@@ -98,7 +98,7 @@ public class MainPainel extends javax.swing.JFrame {
         });
 
         BrushGroup.add(Brush6);
-        Brush6.setText("change");
+        Brush6.setText("Spray");
         Brush6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Brush6ActionPerformed(evt);

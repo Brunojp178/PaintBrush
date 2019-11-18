@@ -40,7 +40,6 @@ public class Retangulo extends D2{
             c.setColor(Color.black);
             DecimalFormat numberFormat = new DecimalFormat("#.00");
             c.drawString(numberFormat.format(area) + "", xi, yi);
-            c.drawString(area + "", xi, yi);
         }
     }
 }

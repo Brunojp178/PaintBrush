@@ -45,28 +45,24 @@ public class Cilindro extends D2{
     
     @Override
     public void draw(Graphics c, boolean info){
+        // Variaveis aux.
+        int auxY;
+        auxY = ((yi + y) - 10);
+        if(corFundo != null){
+            c.setColor(corFundo);
+            c.fillOval(xi, auxY, x, (Math.abs(auxY - (yi + y))));
+            c.fillRect(xi, (yi + 5), x, (y - 10));
+            c.setColor(corFundo.brighter());
+            c.fillOval(xi, yi, x, ((yi + 10) - yi));
+        }
+        // Como a função de oval precisa da distancia de um ponto inicial ao final
+        // tem q calcular o real ponto final pra função de desenhar linha e outros fins
+        // realFinal = xi + x;
         c.setColor(cor);
         c.drawOval(xi, yi, x, ((yi + 10) - yi));
-        c.drawOval(x, y, xi, ((y + 10) - y));
-//        int fimYa; 
-//        
-//        c.setColor(cor);
-//        // 2 * raioMenor = diametro menor
-//        fimYa = yi + (2*raioMenor);
-//        // Primeira elipse
-//        c.drawOval(xi, yi, x, fimYa);
-//        
-//        // segunda elipse
-//        fimYa = y - (2*raioMenor);
-//        c.drawOval(xi, fimYa, x, y);
-//        // Linhas da borda
-//        c.drawLine(xi, (yi + raioMenor), xi, (y - raioMenor));
-//        c.drawLine(x, (yi + raioMenor), x, (y - raioMenor));
-//        if(info){
-//            c.setColor(Color.black);
-//            DecimalFormat numberFormat = new DecimalFormat("#.00");
-//            c.drawString(numberFormat.format(area) + "", xi, yi);
-//        }
+        c.drawOval(xi, auxY, x, (Math.abs(auxY - (yi + y))));
+        c.drawLine(xi, (yi + 5), xi, ((yi + y) - 5));
+        c.drawLine((xi + x), (yi + 5), (xi + x), ((yi + y) - 5));
     }
     
 }

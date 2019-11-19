@@ -3,6 +3,7 @@ package com.mycompany.paintbrush;
 import java.awt.Graphics;
 import brushForms.*;
 import java.awt.Color;
+import java.util.ArrayList;
 
 public class Pincel {
     // Classe pincel, classe principal para controle
@@ -14,24 +15,31 @@ public class Pincel {
     public int tamanho;
     public String figura;
     public Graphics canvas;
-    public int xi, yi, x, y;
+    public ArrayList<Integer> pointsX = new ArrayList(), pointsY = new ArrayList();
+    public int xi, yi, x, y, nPoints;
     public boolean info = false;
     
     // Methods
     public Pincel(){
         figura = "ponto";
+        nPoints = 0;
+    }
+    
+    public void savePoint(int x, int y){
+        pointsX.add(x);
+        pointsY.add(y);
+        nPoints++;
+        System.out.println(nPoints);
     }
     
     public void setInicio(int x, int y){
         this.xi = x;
         this.yi = y;
-        System.out.println(xi + " " + yi);
     }
     
     public void setFim(int x, int y){
         this.x = x;
         this.y = y;
-        System.out.println(x + " " + y);
     }
         
     public void drawPonto(Color c){
@@ -57,5 +65,26 @@ public class Pincel {
     public void drawCilindro(Color c, Color f){
         Cilindro e = new Cilindro(this.xi, this.yi, this.x, this.y, c, f);
         e.draw(canvas, info);
+    }
+    
+    public void drawPoligono(Color c, Color f){
+        int xPoints[] = new int[nPoints], yPoints[] = new int[nPoints];
+        for(int i = 0; i < nPoints; i++){
+            xPoints[i] = pointsX.get(i).intValue();
+            yPoints[i] = pointsY.get(i).intValue();
+        }
+        Poligono ha = new Poligono(xPoints, yPoints, nPoints, c, f);
+        ha.draw(canvas, info);
+        
+        // Limpa os pontos e reseta contador
+        pointsX.clear();
+        pointsY.clear();
+        nPoints = 0;
+        
+    }
+    
+    public void erase(){
+        Borracha b = new Borracha(this.xi, this.yi, this.x, this.y);
+        b.draw(canvas, info);                
     }
 }

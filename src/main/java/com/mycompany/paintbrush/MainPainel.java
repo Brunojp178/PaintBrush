@@ -1,6 +1,7 @@
 package com.mycompany.paintbrush;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
 import javax.swing.JColorChooser;
 import javax.swing.UIManager;
 
@@ -44,6 +45,7 @@ public class MainPainel extends javax.swing.JFrame {
         Brush5 = new javax.swing.JRadioButton();
         Brush6 = new javax.swing.JRadioButton();
         Brush7 = new javax.swing.JRadioButton();
+        Brush8 = new javax.swing.JRadioButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         Canvas = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -113,6 +115,14 @@ public class MainPainel extends javax.swing.JFrame {
             }
         });
 
+        BrushGroup.add(Brush8);
+        Brush8.setText("Poligono");
+        Brush8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Brush8ActionPerformed(evt);
+            }
+        });
+
         jCheckBox1.setText("Exibir info");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,20 +137,17 @@ public class MainPainel extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Brush3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Brush1)
-                            .addComponent(Brush2)
-                            .addComponent(Brush4)
-                            .addComponent(Brush5)
-                            .addComponent(Brush6)
-                            .addComponent(Brush7)
-                            .addComponent(jCheckBox1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(Brush1)
+                    .addComponent(Brush2)
+                    .addComponent(Brush4)
+                    .addComponent(Brush5)
+                    .addComponent(Brush6)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(Brush8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Brush3)
+                    .addComponent(Brush7))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,10 +164,12 @@ public class MainPainel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Brush6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Brush8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Brush7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBox1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         Canvas.setBackground(new java.awt.Color(255, 255, 255));
@@ -305,10 +314,10 @@ public class MainPainel extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Canvas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -360,6 +369,22 @@ public class MainPainel extends javax.swing.JFrame {
                 p.setInicio(evt.getX(), evt.getY());
                 p.drawPonto(painelCor.getBackground());
                 break;
+            case "borracha":
+                p.setInicio((evt.getX() - 10), (evt.getY() - 10));
+                p.setFim(((evt.getX() + 10) - p.xi), ((evt.getY() + 10) - p.yi));
+                p.erase();
+                break;
+            case "poligono":
+                // TODO salvar posição do evt em um vetor se click esquerdo.
+                // desenhar poligono se click direito
+                if(evt.getButton() == MouseEvent.BUTTON1){
+                    System.out.println("Pincel : Registrando ponto poligono");
+                    p.savePoint(evt.getX(), evt.getY());
+                }else{
+                    System.out.println("Pincel : Desenhando poligono");
+                    p.drawPoligono(painelCor.getBackground(), painelCor2.getBackground());
+                }
+                break;
             default:
                 System.out.println("Deu algo errado! :V");
                 break;
@@ -390,6 +415,13 @@ public class MainPainel extends javax.swing.JFrame {
             case "cilindro":
                 System.out.println("Pincel : registrando inicio cilindro");
                 p.setInicio(evt.getX(), evt.getY());
+                break;
+            case "borracha":
+                p.setInicio((evt.getX() - 10), (evt.getY() - 10));
+                p.setFim(((evt.getX() + 10) - p.xi), ((evt.getY() + 10) - p.yi));
+                p.erase();
+                break;
+            case "poligono":
                 break;
             default:
                 System.out.println("Deu algo errado! :V");
@@ -465,6 +497,10 @@ public class MainPainel extends javax.swing.JFrame {
                 p.setFim(fimX, fimY);             
                 p.drawCilindro(painelCor.getBackground(), painelCor2.getBackground());
                 break;
+            case "borracha":
+                break;
+            case "poligono":
+                break;
             default:
                 System.out.println("Deu algo errado! :V");
                 break;
@@ -478,6 +514,11 @@ public class MainPainel extends javax.swing.JFrame {
             p.setInicio(evt.getX(), evt.getY());
             p.info = false;
             p.drawPonto(painelCor.getBackground());
+        }
+        if(p.figura.equals("borracha")){
+            p.setInicio((evt.getX() - 10), (evt.getY() - 10));
+            p.setFim(((evt.getX() + 10) - p.xi), ((evt.getY() + 10) - p.yi));
+            p.erase();
         }
 //        System.out.println("Mouse : arrastando");
     }//GEN-LAST:event_CanvasMouseDragged
@@ -506,6 +547,11 @@ public class MainPainel extends javax.swing.JFrame {
             painelCor.setBackground(paleta.getColor());
         }else painelCor2.setBackground(paleta.getColor());
     }//GEN-LAST:event_jPanel2MouseEntered
+
+    private void Brush8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Brush8ActionPerformed
+        p.figura = "poligono";
+        System.out.println("Pincel : Poligono");
+    }//GEN-LAST:event_Brush8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -551,6 +597,7 @@ public class MainPainel extends javax.swing.JFrame {
     private javax.swing.JRadioButton Brush5;
     private javax.swing.JRadioButton Brush6;
     private javax.swing.JRadioButton Brush7;
+    private javax.swing.JRadioButton Brush8;
     private javax.swing.ButtonGroup BrushGroup;
     private javax.swing.JPanel Canvas;
     private javax.swing.ButtonGroup colorGroup;

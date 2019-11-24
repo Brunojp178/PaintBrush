@@ -2,6 +2,7 @@ package brushForms;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.text.DecimalFormat;
 
 
 public class Linha extends D1{
@@ -20,7 +21,8 @@ public class Linha extends D1{
         c.setColor(cor);
         c.drawLine(xi, yi, x, y);
         if(info){
-            c.drawString(comprimento + "", xi, yi);
+            DecimalFormat numberFormat = new DecimalFormat("#.00");
+            c.drawString(numberFormat.format(comprimento) + "", xi, yi);
         }
     }
 }

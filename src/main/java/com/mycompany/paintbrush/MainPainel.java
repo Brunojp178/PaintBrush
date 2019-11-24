@@ -1,15 +1,16 @@
 package com.mycompany.paintbrush;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
 import javax.swing.JColorChooser;
 import javax.swing.UIManager;
 
 public class MainPainel extends javax.swing.JFrame {
-
-    // Instancia de pincel.
+    
+    // Instancia de um novo pincel e um ponteiro.
     Pincel p = new Pincel();
     JColorChooser paleta;
-
+    
     /**
      * Creates new form MainPainel
      */
@@ -17,10 +18,10 @@ public class MainPainel extends javax.swing.JFrame {
         initComponents();
         p.canvas = Canvas.getGraphics();
         paleta = jColorChooser1;
-
+        
         paleta.setColor(Color.black);
         painelCor.setBackground(paleta.getColor());
-
+        
         colorRoundButton.setSelected(true);
         Brush1.setSelected(true);
     }
@@ -44,8 +45,8 @@ public class MainPainel extends javax.swing.JFrame {
         Brush5 = new javax.swing.JRadioButton();
         Brush6 = new javax.swing.JRadioButton();
         Brush7 = new javax.swing.JRadioButton();
-        sizeComboBox = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        Brush8 = new javax.swing.JRadioButton();
+        jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox1 = new javax.swing.JCheckBox();
         Canvas = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -57,7 +58,7 @@ public class MainPainel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         BrushGroup.add(Brush1);
         Brush1.setText("Ponto");
@@ -115,19 +116,18 @@ public class MainPainel extends javax.swing.JFrame {
             }
         });
 
-        sizeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 px", "3 px", "5 px", "8 px" }));
-        sizeComboBox.addActionListener(new java.awt.event.ActionListener() {
+        BrushGroup.add(Brush8);
+        Brush8.setText("Poligono");
+        Brush8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sizeComboBoxActionPerformed(evt);
+                Brush8ActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("Tamanho: ");
 
         jCheckBox1.setText("Exibir info");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                jCheckBox1ActionPerformed1(evt);
             }
         });
 
@@ -138,22 +138,16 @@ public class MainPainel extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Brush3))
-                    .addComponent(sizeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Brush1)
-                            .addComponent(Brush2)
-                            .addComponent(Brush4)
-                            .addComponent(Brush5)
-                            .addComponent(Brush6)
-                            .addComponent(Brush7)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(Brush1)
+                    .addComponent(Brush2)
+                    .addComponent(Brush4)
+                    .addComponent(Brush5)
+                    .addComponent(Brush6)
+                    .addComponent(Brush8, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Brush3)
+                    .addComponent(Brush7)
+                    .addComponent(jCheckBox1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,13 +164,11 @@ public class MainPainel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Brush6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Brush8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Brush7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -225,7 +217,7 @@ public class MainPainel extends javax.swing.JFrame {
         );
         painelCorLayout.setVerticalGroup(
             painelCorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         painelCor2.setBackground(new java.awt.Color(255, 255, 255));
@@ -278,26 +270,26 @@ public class MainPainel extends javax.swing.JFrame {
                         .addComponent(painelCor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(colorRoundButton2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(134, 134, 134)
+                .addGap(87, 87, 87)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(painelCor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(colorRoundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(colorRoundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(painelCor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(colorRoundButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -311,7 +303,7 @@ public class MainPainel extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 16, Short.MAX_VALUE))
+                        .addGap(0, 32, Short.MAX_VALUE))
                     .addComponent(Canvas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -321,10 +313,10 @@ public class MainPainel extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Canvas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -371,10 +363,26 @@ public class MainPainel extends javax.swing.JFrame {
         // Click do mouse
         System.out.println("Mouse : click");
         String fig = p.figura;
-        switch (fig) {
+        switch(fig){
             case "ponto":
                 p.setInicio(evt.getX(), evt.getY());
                 p.drawPonto(painelCor.getBackground());
+                break;
+            case "borracha":
+                p.setInicio((evt.getX() - 10), (evt.getY() - 10));
+                p.setFim(((evt.getX() + 10) - p.xi), ((evt.getY() + 10) - p.yi));
+                p.erase();
+                break;
+            case "poligono":
+                // TODO salvar posição do evt em um vetor se click esquerdo.
+                // desenhar poligono se click direito
+                if(evt.getButton() == MouseEvent.BUTTON1){
+                    System.out.println("Pincel : Registrando ponto poligono");
+                    p.savePoint(evt.getX(), evt.getY());
+                }else{
+                    System.out.println("Pincel : Desenhando poligono");
+                    p.drawPoligono(painelCor.getBackground(), painelCor2.getBackground());
+                }
                 break;
             case "spray":
                // p.setInicio(evt.getX(), evt.getY());
@@ -392,7 +400,7 @@ public class MainPainel extends javax.swing.JFrame {
         // Prechionar do mouse
         System.out.println("Mouse : segurando");
         String fig = p.figura;
-        switch (fig) {
+        switch(fig){
             case "ponto":
                 p.setInicio(evt.getX(), evt.getY());
                 p.drawPonto(painelCor.getBackground());
@@ -404,6 +412,21 @@ public class MainPainel extends javax.swing.JFrame {
             case "retangulo":
                 System.out.println("Pincel : registrando inicio retangulo");
                 p.setInicio(evt.getX(), evt.getY());
+                break;
+            case "circulo":
+                System.out.println("Pincel : registrando inicio circulo");
+                p.setInicio(evt.getX(), evt.getY());
+                break;
+            case "cilindro":
+                System.out.println("Pincel : registrando inicio cilindro");
+                p.setInicio(evt.getX(), evt.getY());
+                break;
+            case "borracha":
+                p.setInicio((evt.getX() - 10), (evt.getY() - 10));
+                p.setFim(((evt.getX() + 10) - p.xi), ((evt.getY() + 10) - p.yi));
+                p.erase();
+                break;
+            case "poligono":
                 break;
             case "spray":
                 System.out.println("Pincel : registrando inicio spray");
@@ -418,12 +441,14 @@ public class MainPainel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CanvasMousePressed
 
-    private void CanvasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CanvasMouseReleased
+    private void CanvasMouseReleased(java.awt.event.MouseEvent evt) {                                     
         // Soltar do mouse
         System.out.println("Mouse : solto");
+        // Variaveis auxiliares
+        int fimX, fimY;
         // Quando solta o mouse, marca o ponto final nas variaveis x e y do pincel
         // e chama a função desenho da respectiva forma, passando como parametro as cores dos paineis de seleção de cor.
-        switch (p.figura) {
+        switch(p.figura){
             case "ponto":
                 break;
             case "linha":
@@ -431,47 +456,80 @@ public class MainPainel extends javax.swing.JFrame {
                 p.drawLinha(painelCor.getBackground());
                 break;
             case "retangulo":
-                int fimX,
-                 fimY;
                 // Se ponto final é menor que ponto inicial, inverte.
-
-                if (p.xi > evt.getX()) {
+                if(p.xi > evt.getX()){
                     p.x = p.xi;
                     p.xi = evt.getX();
-                } else {
-                    p.x = evt.getX();
-                }
-                if (p.yi > evt.getY()) {
+                }else p.x = evt.getX();
+                if(p.yi > evt.getY()){
                     p.y = p.yi;
                     p.yi = evt.getY();
-                } else {
-                    p.y = evt.getY();
-                }
-
+                }else p.y = evt.getY();
                 // Pega a distancia do ponto final até o inicial, pois 
                 // drawRect() soma uma largura a ser desenhada e não desenha de um ponto a outro;
                 fimX = p.x - p.xi;
                 fimY = p.y - p.yi;
-
-                p.setFim(fimX, fimY);
+                p.setFim(fimX, fimY);             
                 p.drawRetangulo(painelCor.getBackground(), painelCor2.getBackground());
                 break;
-            case "spray":
+            case "circulo":
+                // Se ponto final é menor que ponto inicial, inverte.
+                if(p.xi > evt.getX()){
+                    p.x = p.xi;
+                    p.xi = evt.getX();
+                }else p.x = evt.getX();
+                if(p.yi > evt.getY()){
+                    p.y = p.yi;
+                    p.yi = evt.getY();
+                }else p.y = evt.getY();
+                
+                // Pega a distancia do ponto final até o inicial, pois 
+                fimX = p.x - p.xi;
+                fimY = p.y - p.yi;
+                
+                p.setFim(fimX, fimY);             
+                p.drawElipse(painelCor.getBackground(), painelCor2.getBackground());
+                break;
+            case "cilindro":
+                // Se ponto final é menor que ponto inicial, inverte.
+                if(p.xi > evt.getX()){
+                    p.x = p.xi;
+                    p.xi = evt.getX();
+                }else p.x = evt.getX();
+                if(p.yi > evt.getY()){
+                    p.y = p.yi;
+                    p.yi = evt.getY();
+                }else p.y = evt.getY();
+                // Pega a distancia do ponto final até o inicial, pois 
+                fimX = p.x - p.xi;
+                fimY = p.y - p.yi;
+                
+                p.setFim(fimX, fimY);             
+                p.drawCilindro(painelCor.getBackground(), painelCor2.getBackground());
+                break;
+            case "borracha":
+                break;
+            case "poligono":
                 break;
             default:
                 System.out.println("Deu algo errado! :V");
                 break;
         }
-
-    }//GEN-LAST:event_CanvasMouseReleased
+    }                                    
 
     private void CanvasMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CanvasMouseDragged
         // Arrastar do mouse
-        if (p.figura.equals("ponto")) {
+        if(p.figura.equals("ponto")){
             p.setInicio(evt.getX(), evt.getY());
             p.info = false;
             p.drawPonto(painelCor.getBackground());
-        }if(p.figura.equals("spray")) {
+        }
+        if(p.figura.equals("borracha")){
+            p.setInicio((evt.getX() - 10), (evt.getY() - 10));
+            p.setFim(((evt.getX() + 10) - p.xi), ((evt.getY() + 10) - p.yi));
+            p.erase();
+        }
+        if(p.figura.equals("spray")){
            // p.setInicio(evt.getX(), evt.getY());
             p.x = evt.getX();
             p.y = evt.getY();
@@ -481,57 +539,33 @@ public class MainPainel extends javax.swing.JFrame {
 //        System.out.println("Mouse : arrastando");
     }//GEN-LAST:event_CanvasMouseDragged
 
-    private void sizeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sizeComboBoxActionPerformed
-        int index = sizeComboBox.getSelectedIndex();
-        switch (index) {
-            case 0:
-                p.tamanho = 1;
-                System.out.println("Pincel: tamanho = " + p.tamanho + "px");
-                break;
-            case 1:
-                p.tamanho = 3;
-                System.out.println("Pincel: tamanho = " + p.tamanho + "px");
-                break;
-            case 2:
-                p.tamanho = 5;
-                System.out.println("Pincel: tamanho = " + p.tamanho + "px");
-                break;
-            case 3:
-                p.tamanho = 8;
-                System.out.println("Pincel: tamanho = " + p.tamanho + "px");
-                break;
-            default:
-                p.tamanho = 1;
-                System.out.println("Pincel: tamanho = " + p.tamanho + "px");
-                break;
-        }
-    }//GEN-LAST:event_sizeComboBoxActionPerformed
+    private void colorRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        painelCor.setBackground(paleta.getColor());
+    }                                                
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void colorRoundButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        painelCor2.setBackground(paleta.getColor());
+    }                                                 
+
+    private void jColorChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {                                              
+        System.out.println("changed");
+    }                                             
+
+    private void jPanel2MouseEntered(java.awt.event.MouseEvent evt) {                                     
+        if(colorRoundButton.isSelected()){
+            painelCor.setBackground(paleta.getColor());
+        }else painelCor2.setBackground(paleta.getColor());
+    }                                    
+
+    private void Brush8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Brush8ActionPerformed
+        p.figura = "poligono";
+        System.out.println("Pincel : Poligono");
+    }//GEN-LAST:event_Brush8ActionPerformed
+
+    private void jCheckBox1ActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed1
         p.info = !p.info;
         System.out.println("Pincel : informações = " + p.info);
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
-    private void colorRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorRoundButtonActionPerformed
-        // TODO mudar cor do painel de visualização e do Pincel
-        painelCor.setBackground(paleta.getColor());
-    }//GEN-LAST:event_colorRoundButtonActionPerformed
-
-    private void colorRoundButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorRoundButton2ActionPerformed
-        // TODO add your handling code here:
-        painelCor2.setBackground(paleta.getColor());
-    }//GEN-LAST:event_colorRoundButton2ActionPerformed
-
-    private void jColorChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jColorChooser1PropertyChange
-        System.out.println("changed");
-    }//GEN-LAST:event_jColorChooser1PropertyChange
-
-    private void jPanel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseEntered
-        if (colorRoundButton.isSelected()) {
-            painelCor.setBackground(paleta.getColor());
-        } else
-            painelCor2.setBackground(paleta.getColor());
-    }//GEN-LAST:event_jPanel2MouseEntered
+    }//GEN-LAST:event_jCheckBox1ActionPerformed1
 
     /**
      * @param args the command line arguments
@@ -577,19 +611,19 @@ public class MainPainel extends javax.swing.JFrame {
     private javax.swing.JRadioButton Brush5;
     private javax.swing.JRadioButton Brush6;
     private javax.swing.JRadioButton Brush7;
+    private javax.swing.JRadioButton Brush8;
     private javax.swing.ButtonGroup BrushGroup;
     private javax.swing.JPanel Canvas;
     private javax.swing.ButtonGroup colorGroup;
     private javax.swing.JRadioButton colorRoundButton;
     private javax.swing.JRadioButton colorRoundButton2;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JColorChooser jColorChooser1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel painelCor;
     private javax.swing.JPanel painelCor2;
-    private javax.swing.JComboBox<String> sizeComboBox;
     // End of variables declaration//GEN-END:variables
     //</editor-fold>
 }

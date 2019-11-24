@@ -2,6 +2,7 @@ package brushForms;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.text.DecimalFormat;
 
 
 public class Retangulo extends D2{
@@ -37,7 +38,8 @@ public class Retangulo extends D2{
         c.drawRect(xi, yi, x, y);
         if(info){
             c.setColor(Color.black);
-            c.drawString(area + "", xi, yi);
+            DecimalFormat numberFormat = new DecimalFormat("#.00");
+            c.drawString(numberFormat.format(area) + "", xi, yi);
         }
     }
 }

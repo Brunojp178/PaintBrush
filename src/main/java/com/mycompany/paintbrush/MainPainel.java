@@ -7,7 +7,7 @@ import javax.swing.UIManager;
 
 public class MainPainel extends javax.swing.JFrame {
     
-    // Instancia de pincel.
+    // Instancia de um novo pincel e um ponteiro.
     Pincel p = new Pincel();
     JColorChooser paleta;
     
@@ -173,7 +173,6 @@ public class MainPainel extends javax.swing.JFrame {
         );
 
         Canvas.setBackground(new java.awt.Color(255, 255, 255));
-        Canvas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         Canvas.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 CanvasMouseDragged(evt);

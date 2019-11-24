@@ -29,7 +29,6 @@ public class Pincel {
         pointsX.add(x);
         pointsY.add(y);
         nPoints++;
-        System.out.println(nPoints);
     }
     
     public void setInicio(int x, int y){
@@ -68,19 +67,23 @@ public class Pincel {
     }
     
     public void drawPoligono(Color c, Color f){
-        int xPoints[] = new int[nPoints], yPoints[] = new int[nPoints];
+        // Cria dois vetores de inteiros
+        int xPoints[] = new int[nPoints];
+        int yPoints[] = new int[nPoints];
+        
+        // Copia pontos de arraylist para arrays
         for(int i = 0; i < nPoints; i++){
-            xPoints[i] = pointsX.get(i).intValue();
-            yPoints[i] = pointsY.get(i).intValue();
+            xPoints[i] = pointsX.get(i);
+            yPoints[i] = pointsY.get(i);
+            System.out.println(xPoints[i] + ", " + yPoints[i]);
         }
-        Poligono ha = new Poligono(xPoints, yPoints, nPoints, c, f);
-        ha.draw(canvas, info);
+        Poligono k = new Poligono(xPoints, yPoints, nPoints, c, f);
+        k.draw(canvas, info);
         
         // Limpa os pontos e reseta contador
         pointsX.clear();
         pointsY.clear();
         nPoints = 0;
-        
     }
     
     public void erase(){

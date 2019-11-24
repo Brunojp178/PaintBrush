@@ -46,4 +46,8 @@ public class Pincel {
         Retangulo r = new Retangulo(this.xi, this.yi, this.x, this.y, c, f);
         r.draw(canvas, info);
     }
+    public void drawSpray(Color c){
+        Spray s = new Spray(this.xi, this.yi, this.x, this.y, c, 8);
+        s.draw(canvas, info);
+    }
 }

@@ -46,6 +46,7 @@ public class MainPainel extends javax.swing.JFrame {
         Brush6 = new javax.swing.JRadioButton();
         Brush7 = new javax.swing.JRadioButton();
         Brush8 = new javax.swing.JRadioButton();
+        jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox1 = new javax.swing.JCheckBox();
         Canvas = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -57,7 +58,7 @@ public class MainPainel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         BrushGroup.add(Brush1);
         Brush1.setText("Ponto");
@@ -126,14 +127,7 @@ public class MainPainel extends javax.swing.JFrame {
         jCheckBox1.setText("Exibir info");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox1.setText("Exibir info");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                jCheckBox1ActionPerformed1(evt);
             }
         });
 
@@ -149,11 +143,10 @@ public class MainPainel extends javax.swing.JFrame {
                     .addComponent(Brush4)
                     .addComponent(Brush5)
                     .addComponent(Brush6)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(Brush8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Brush8, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Brush3)
-                    .addComponent(Brush7))
+                    .addComponent(Brush7)
+                    .addComponent(jCheckBox1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -448,7 +441,7 @@ public class MainPainel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CanvasMousePressed
 
-    private void CanvasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CanvasMouseReleased
+    private void CanvasMouseReleased(java.awt.event.MouseEvent evt) {                                     
         // Soltar do mouse
         System.out.println("Mouse : solto");
         // Variaveis auxiliares
@@ -546,11 +539,6 @@ public class MainPainel extends javax.swing.JFrame {
 //        System.out.println("Mouse : arrastando");
     }//GEN-LAST:event_CanvasMouseDragged
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        p.info = !p.info;
-        System.out.println("Pincel : informações = " + p.info);
-    }                                          
-
     private void colorRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         painelCor.setBackground(paleta.getColor());
     }                                                
@@ -573,6 +561,11 @@ public class MainPainel extends javax.swing.JFrame {
         p.figura = "poligono";
         System.out.println("Pincel : Poligono");
     }//GEN-LAST:event_Brush8ActionPerformed
+
+    private void jCheckBox1ActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed1
+        p.info = !p.info;
+        System.out.println("Pincel : informações = " + p.info);
+    }//GEN-LAST:event_jCheckBox1ActionPerformed1
 
     /**
      * @param args the command line arguments
@@ -625,6 +618,7 @@ public class MainPainel extends javax.swing.JFrame {
     private javax.swing.JRadioButton colorRoundButton;
     private javax.swing.JRadioButton colorRoundButton2;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

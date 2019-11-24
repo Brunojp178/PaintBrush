@@ -86,8 +86,13 @@ public class Pincel {
         nPoints = 0;
     }
     
+    public void drawSpray(Color c){
+        Spray s = new Spray(this.xi, this.yi, this.x, this.y, c, 8);
+        s.draw(canvas, info);
+    }
+    
     public void erase(){
         Borracha b = new Borracha(this.xi, this.yi, this.x, this.y);
-        b.draw(canvas, info);                
+        b.draw(canvas, info);
     }
 }

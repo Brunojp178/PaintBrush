@@ -57,7 +57,7 @@ public class MainPainel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(null));
 
         BrushGroup.add(Brush1);
         Brush1.setText("Ponto");
@@ -120,6 +120,13 @@ public class MainPainel extends javax.swing.JFrame {
         Brush8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Brush8ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox1.setText("Exibir info");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
             }
         });
 
@@ -350,8 +357,8 @@ public class MainPainel extends javax.swing.JFrame {
     }//GEN-LAST:event_Brush5ActionPerformed
 
     private void Brush6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Brush6ActionPerformed
-        p.figura = "texto";
-        System.out.println("Pincel : Texto");
+        p.figura = "spray";
+        System.out.println("Pincel : Spray");
     }//GEN-LAST:event_Brush6ActionPerformed
 
     private void Brush7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Brush7ActionPerformed
@@ -383,6 +390,12 @@ public class MainPainel extends javax.swing.JFrame {
                     System.out.println("Pincel : Desenhando poligono");
                     p.drawPoligono(painelCor.getBackground(), painelCor2.getBackground());
                 }
+                break;
+            case "spray":
+               // p.setInicio(evt.getX(), evt.getY());
+                p.x = evt.getX();
+                p.y = evt.getY();
+                p.drawSpray(painelCor.getBackground());
                 break;
             default:
                 System.out.println("Deu algo errado! :V");
@@ -422,6 +435,13 @@ public class MainPainel extends javax.swing.JFrame {
                 break;
             case "poligono":
                 break;
+            case "spray":
+                System.out.println("Pincel : registrando inicio spray");
+                //p.setInicio(evt.getX(), evt.getY());
+                p.x = evt.getX();
+                p.y = evt.getY();
+                p.drawSpray(painelCor.getBackground());
+                break;
             default:
                 System.out.println("Deu algo errado! :V");
                 break;
@@ -452,12 +472,10 @@ public class MainPainel extends javax.swing.JFrame {
                     p.y = p.yi;
                     p.yi = evt.getY();
                 }else p.y = evt.getY();
-                
                 // Pega a distancia do ponto final até o inicial, pois 
                 // drawRect() soma uma largura a ser desenhada e não desenha de um ponto a outro;
                 fimX = p.x - p.xi;
                 fimY = p.y - p.yi;
-                
                 p.setFim(fimX, fimY);             
                 p.drawRetangulo(painelCor.getBackground(), painelCor2.getBackground());
                 break;
@@ -504,8 +522,7 @@ public class MainPainel extends javax.swing.JFrame {
                 System.out.println("Deu algo errado! :V");
                 break;
         }
-        
-    }//GEN-LAST:event_CanvasMouseReleased
+    }                                    
 
     private void CanvasMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CanvasMouseDragged
         // Arrastar do mouse
@@ -519,33 +536,38 @@ public class MainPainel extends javax.swing.JFrame {
             p.setFim(((evt.getX() + 10) - p.xi), ((evt.getY() + 10) - p.yi));
             p.erase();
         }
+        if(p.figura.equals("spray")){
+           // p.setInicio(evt.getX(), evt.getY());
+            p.x = evt.getX();
+            p.y = evt.getY();
+            p.info = false;
+            p.drawSpray(painelCor.getBackground());
+        }
 //        System.out.println("Mouse : arrastando");
     }//GEN-LAST:event_CanvasMouseDragged
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         p.info = !p.info;
         System.out.println("Pincel : informações = " + p.info);
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }                                          
 
-    private void colorRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorRoundButtonActionPerformed
-        // TODO mudar cor do painel de visualização e do Pincel
+    private void colorRoundButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         painelCor.setBackground(paleta.getColor());
-    }//GEN-LAST:event_colorRoundButtonActionPerformed
+    }                                                
 
-    private void colorRoundButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorRoundButton2ActionPerformed
-        // TODO add your handling code here:
+    private void colorRoundButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         painelCor2.setBackground(paleta.getColor());
-    }//GEN-LAST:event_colorRoundButton2ActionPerformed
+    }                                                 
 
-    private void jColorChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jColorChooser1PropertyChange
+    private void jColorChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {                                              
         System.out.println("changed");
-    }//GEN-LAST:event_jColorChooser1PropertyChange
+    }                                             
 
-    private void jPanel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseEntered
+    private void jPanel2MouseEntered(java.awt.event.MouseEvent evt) {                                     
         if(colorRoundButton.isSelected()){
             painelCor.setBackground(paleta.getColor());
         }else painelCor2.setBackground(paleta.getColor());
-    }//GEN-LAST:event_jPanel2MouseEntered
+    }                                    
 
     private void Brush8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Brush8ActionPerformed
         p.figura = "poligono";
@@ -586,7 +608,7 @@ public class MainPainel extends javax.swing.JFrame {
             }
         });
     }
-    
+
     //<editor-fold defaultstate="collapsed" desc=" Variables Declaration (UI) ">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton Brush1;
